@@ -3,7 +3,7 @@
 	 * |      RR       |      GG       |      BB       |      AA       |
 	 * |0 0 0 0 0 0 0 0|0 0 0 0 0 0 0 0|0 0 0 0 0 0 0 0|0 0 0 0 0 0 0 0|
 	 * |R R R R G G G G|B B B R R R R G|G G G B B B R R|R G G G G B B B|
-	 * |- - - - = = = = - - - = = = = - - - - = = = - - - = = = = - - -|
+	 * |- - - - = = = = - - -|= = = = - - - - = = =|- - - = = = = - - -|
 	 * |       color 0       |       color 1       |      color 2      |
 	 * |       11-bit        |       11-bit        |      10-bit       |
 	 */
@@ -33,11 +33,6 @@
 		calc(mod(round(down, alpha * 255), pow(2,3)) / 7)
 		/ 1
 	);
-
-	background:
-		radial-gradient(150% 75% at 80% 100%, var(--lqip-c2), transparent),
-		radial-gradient(100% 75% at 40% 50%, var(--lqip-c1), transparent),
-		var(--lqip-c0);
 
 	background:
 		radial-gradient(

@@ -2,28 +2,39 @@
 
 :root {
 	--color-primary: blue;
+	--font-primary: 'Smooch Sans', sans-serif;
 }
 
 html {
 	body {
-		font-family: sans-serif;
+		font-family: var(--font-primary);
 		margin: 0;
 		padding: 0;
 	}
 }
 
+header {
+	margin: auto;
+	max-width: 900px;
+}
+
 main {
 	display: block;
 	margin: auto;
-	max-width: 900px;
 	width: 100%;
 }
 
 .images {
+	display: grid;
+	gap: 1em;
+	grid-template-columns: repeat(auto-fit, minmax(600px, 1fr));
+	padding: 1em;
+	place-content: center;
+
 	.demo {
 		display: grid;
-		gap: 1em;
-		grid-template-columns: repeat(3, 1fr);
+		gap: 0.5em;
+		grid-template-columns: 3fr 3fr 2fr;
 
 		input {
 			display: none;
@@ -31,13 +42,26 @@ main {
 
 		img,
 		.preview {
-			width: 200px;
+			width: 100%;
 		}
 
 		canvas {
-			aspect-ratio: 3 / 2;
+			aspect-ratio: 1;
 			image-rendering: pixelated;
-			width: 200px;
+			width: 100%;
+		}
+
+		.colors {
+			.packed-colors {
+				aspect-ratio: 3 / 1;
+				background: linear-gradient(
+					to right,
+					var(--lqip-c0) 33%,
+					var(--lqip-c1) 33%,
+					var(--lqip-c1) 66%,
+					var(--lqip-c2) 66%
+				);
+			}
 		}
 
 		.preview {

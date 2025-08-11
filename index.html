@@ -4,6 +4,9 @@
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<title>CSS LQIP demo</title>
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Smooch+Sans:wght@100..900&display=swap" rel="stylesheet">
 		<link rel="stylesheet" href="index.css" media="screen">
 	</head>
 	<body>
@@ -11,6 +14,10 @@
 			<div class="demo">
 				<div class="image">
 					<span>Image</span>
+				</div>
+
+				<div class="preview">
+					<span>Generated LQIP</span>
 				</div>
 
 				<div class="colors">
@@ -25,19 +32,17 @@
 
 					<code></code>
 				</div>
-
-				<div class="preview">
-					<span>Generated LQIP</span>
-				</div>
 			</div>
 		</template>
 
-		<main>
+		<header>
 			<h1>LQIP in pure CSS</h1>
 			<p class="note">
 				<code>Canvas</code> is used to select the colors of the images. Due to the nature of <code>canvas</code>, results will vary between different browsers and platforms.
 			</p>
+		</header>
 
+		<main>
 			<div class="images">
 				<img loading="lazy" src="images/samuel-ferrara-iecJiKe_RNg-unsplash.jpg" title="Photo by Samuel Ferrara on Unsplash">
 				<img loading="lazy" src="images/severin-demchuk-yhsSR-se1l0-unsplash.jpg" title="Photo by Severin Demchuk on Unsplash">

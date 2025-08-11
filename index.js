@@ -28,7 +28,7 @@ class ImageDemo {
 		const canvas = document.createElement('canvas')
 		canvas.width = canvas.height = 3
 		this.context = canvas.getContext('2d')
-		this.element.querySelector('.colors').append(canvas)
+		this.element.querySelector('.resized').append(canvas)
 
 		// Prepare the preview.
 		this.preview = this.image.cloneNode(true)
@@ -62,6 +62,7 @@ class ImageDemo {
 		const hex = `#${combined.toString(16).padStart(8, '0')}`
 
 		this.preview.style.setProperty('--lqip', hex)
+		this.element.querySelector('.packed-colors').style.setProperty('--lqip', hex)
 
 		this.element.querySelector('code').textContent = `--lqip:${hex};`
 	}
