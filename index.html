@@ -1,0 +1,69 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>CSS LQIP demo</title>
+		<link rel="stylesheet" href="index.css" media="screen">
+	</head>
+	<body>
+		<template id="demo-template">
+			<div class="demo">
+				<div class="image">
+					<span>Image</span>
+				</div>
+
+				<div class="colors">
+					<div class="resized">
+						<span>Resized</span>
+					</div>
+
+					<div class="packed">
+						<span>Packed colors</span>
+						<div class="packed-colors"></div>
+					</div>
+
+					<code></code>
+				</div>
+
+				<div class="preview">
+					<span>Generated LQIP</span>
+				</div>
+			</div>
+		</template>
+
+		<main>
+			<h1>LQIP in pure CSS</h1>
+			<p class="note">
+				<code>Canvas</code> is used to select the colors of the images. Due to the nature of <code>canvas</code>, results will vary between different browsers and platforms.
+			</p>
+
+			<div class="images">
+				<img loading="lazy" src="images/samuel-ferrara-iecJiKe_RNg-unsplash.jpg" title="Photo by Samuel Ferrara on Unsplash">
+				<img loading="lazy" src="images/severin-demchuk-yhsSR-se1l0-unsplash.jpg" title="Photo by Severin Demchuk on Unsplash">
+				<img loading="lazy" src="images/stormseeker-sX3FUq37Ve8-unsplash.jpg" title="Photo by Stormseeker on Unsplash">
+				<img loading="lazy" src="images/vicky-hladynets-sDDtChahKQ4-unsplash.jpg" title="Photo by Vicky Hladynets on Unsplash">
+				<img loading="lazy" src="images/chad-montano-MqT0asuoIcU-unsplash.jpg" title="Photo by Chad Montano on Unsplash">
+				<img loading="lazy" src="images/annie-spratt-XgXxJVyP1vA-unsplash.jpg" title="Photo by Annie Spratt on Unsplash">
+				<img loading="lazy" src="images/ari-kurniawan-wAg0NlNOd4M-unsplash.jpg" title="Photo by Ari Kurniawan on Unsplash">
+				<img loading="lazy" src="images/caleb-george-5sF6NrB1MEg-unsplash.jpg" title="Photo by Caleb George on Unsplash">
+				<img loading="lazy" src="images/doncoombez-GjCFTqRxETI-unsplash.jpg" title="Photo by Doncoombez on Unsplash">
+				<img loading="lazy" src="images/fadhil-abhimantra-WLggWHtSnjA-unsplash.jpg" title="Photo by Fadhil Abhimantra on Unsplash">
+				<img loading="lazy" src="images/jonas-degener-J9RFnXJ12TQ-unsplash.jpg" title="Photo by Jonas Degener on Unsplash">
+				<img loading="lazy" src="images/jose-g-ortega-castro-j-stvO_SzE8-unsplash.jpg" title="Photo by Jose G. Ortega Castro on Unsplash">
+				<img loading="lazy" src="images/josh-hild-SKlj7Az8DCQ-unsplash.jpg" title="Photo by Josh Hild on Unsplash">
+				<img loading="lazy" src="images/launde-morel-HzvfONwKapE-unsplash.jpg" title="Photo by Launde Morel on Unsplash">
+				<img loading="lazy" src="images/martin-sanchez-l1_ANquXW1E-unsplash.jpg" title="Photo by Martin Sanchez on Unsplash">
+				<img loading="lazy" src="images/nikita-pishchugin-zYyKL6LnzSU-unsplash.jpg" title="Photo by Nikita Pishchugin on Unsplash">
+				<img loading="lazy" src="images/luis-villasmil-ITFwHdPEED0-unsplash.jpg" title="Photo by Luis Villasmil on Unsplash">
+				<img loading="lazy" src="images/martin-katler-z5CpcPh5aW4-unsplash.jpg" title="Photo by Martin Katler on Unsplash">
+				<img loading="lazy" src="images/eugene-chystiakov-bOOfIxzsCZQ-unsplash.jpg" title="Photo by Eugene Chystiakov on Unsplash">
+				<img loading="lazy" src="images/tiago-ferreira-em5xx3FgXMo-unsplash.jpg" title="Photo by Tiago Ferreira on Unsplash">
+				<img loading="lazy" src="images/junaid-aziz-kDxqYhuPugk-unsplash.jpg" title="Photo by Junai Aziz on Unsplash">
+				<img loading="lazy" src="images/deniz-altindas-jVLahCBXaJs-unsplash.jpg" title="Photo by Deniz Altindas on Unsplash">
+				<img loading="lazy" src="images/ian-dooley-TLD6iCOlyb0-unsplash.jpg" title="Photo by Ian Dooley on Unsplash">
+			</div>
+		</main>
+	</body>
+	<script src="index.js" type="module"></script>
+</html>

@@ -1,0 +1,53 @@
+@import url('./lqip.css') layer(lqip);
+
+:root {
+	--color-primary: blue;
+}
+
+html {
+	body {
+		font-family: sans-serif;
+		margin: 0;
+		padding: 0;
+	}
+}
+
+main {
+	display: block;
+	margin: auto;
+	max-width: 900px;
+	width: 100%;
+}
+
+.images {
+	.demo {
+		display: grid;
+		gap: 1em;
+		grid-template-columns: repeat(3, 1fr);
+
+		input {
+			display: none;
+		}
+
+		img,
+		.preview {
+			width: 200px;
+		}
+
+		canvas {
+			aspect-ratio: 3 / 2;
+			image-rendering: pixelated;
+			width: 200px;
+		}
+
+		.preview {
+			img {
+				object-position: 200vw 0;
+
+				&:hover {
+					object-position: revert;
+				}
+			}
+		}
+	}
+}
