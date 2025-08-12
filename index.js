@@ -38,8 +38,14 @@ class ImageDemo {
 		this.image.addEventListener('load', () => this.render())
 	}
 
-	render() {
-		this.context.drawImage(this.image, 0, 0, this.context.canvas.width, this.context.canvas.height)
+	async render() {
+		const bitmap = await createImageBitmap(this.image, {
+			resizeHeight: this.context.canvas.height,
+			resizeQuality: 'high',
+			resizeWidth: this.context.canvas.width,
+		})
+
+		this.context.drawImage(bitmap, 0, 0, this.context.canvas.width, this.context.canvas.height)
 
 		// Get the colors and pack them into a 32-bit value.
 		const imageData = this.context.getImageData(0, 0, this.context.canvas.width, this.context.canvas.height)
