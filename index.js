@@ -9,6 +9,29 @@ addEventListener('DOMContentLoaded', () => {
 		const demo = new ImageDemo(image)
 		imagesElement.append(demo.element)
 	}
+
+	// Select image(s)
+	const selectInput = document.getElementById('select-images')
+	selectInput.addEventListener('change', (event) => {
+		const files = event.target.files
+		for (const file of files) {
+			const image = new Image()
+			image.src = URL.createObjectURL(file)
+			const demo = new ImageDemo(image)
+			imagesElement.insertBefore(demo.element, imagesElement.firstChild)
+		}
+	})
+
+	const selectButton = document.getElementById('select-images-button')
+	selectButton.addEventListener('click', () => selectInput.showPicker())
+
+	// Toggle colors preview.
+	const toggleColorsButton = document.getElementById('toggle-colors')
+	toggleColorsButton.addEventListener('click', () => {
+		document.startViewTransition(() => {
+			document.body.classList.toggle('show-colors')
+		})
+	})
 })
 
 class ImageDemo {
@@ -20,6 +43,7 @@ class ImageDemo {
 		this.image = image
 
 		this.element = this.constructor.templateElement.content.cloneNode(true).children[0]
+		this.element.id = 'image-' + crypto.randomUUID()
 
 		// Give the new image its new home.
 		this.element.querySelector('.image').append(this.image)
@@ -47,6 +71,8 @@ class ImageDemo {
 
 		this.context.drawImage(bitmap, 0, 0, this.context.canvas.width, this.context.canvas.height)
 
+		bitmap.close()
+
 		// Get the colors and pack them into a 32-bit value.
 		const imageData = this.context.getImageData(0, 0, this.context.canvas.width, this.context.canvas.height)
 		const pixels = []
@@ -70,6 +96,6 @@ class ImageDemo {
 		this.preview.style.setProperty('--lqip', hex)
 		this.element.querySelector('.packed-colors').style.setProperty('--lqip', hex)
 
-		this.element.querySelector('code').textContent = `--lqip:${hex};`
+		this.element.querySelector('code').textContent = hex
 	}
 }

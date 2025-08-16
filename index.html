@@ -13,22 +13,15 @@
 	<body>
 		<template id="demo-template">
 			<div class="demo">
-				<div class="image">
-					<span>Image</span>
-				</div>
+				<div class="image"></div>
 
-				<div class="preview">
-					<span>Generated LQIP</span>
-				</div>
+				<div class="preview"></div>
 
 				<div class="colors">
-					<div class="resized">
-						<span>Resized</span>
-					</div>
+					<div class="resized" title="Resized image (used to pick colors)"></div>
 
 					<div class="packed">
-						<span>Packed colors</span>
-						<div class="packed-colors"></div>
+						<div class="packed-colors" title="Packed colors"></div>
 					</div>
 
 					<code></code>
@@ -39,8 +32,15 @@
 		<header>
 			<h1>LQIP in pure CSS</h1>
 			<p class="note">
-				<code>Canvas</code> is used to select the colors of the images. Due to the nature of <code>canvas</code>, selected colors will vary between different browsers and platforms.
+				<code>Canvas</code> and <code>ImageBitmap</code> are used to select the colors of the images. Due to their nature the selected colors will vary between different browsers and platforms.
 			</p>
+
+			<div class="controls">
+				<button id="select-images-button" class="icon">Select images</button>
+				<input type="file" accept="image/*" id="select-images" multiple>
+
+				<button id="toggle-colors" class="icon">Toggle colors preview</button>
+			</div>
 		</header>
 
 		<main>

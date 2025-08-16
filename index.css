@@ -1,26 +1,96 @@
 @import url('./lqip.css') layer(lqip);
 
 :root {
-	--color-primary: blue;
+	color-scheme: light dark;
+
+	--color-primary: light-dark(rgb(9 75 105), rgb(42 164 245));
+	--color-background: light-dark(rgb(238 238 238), rgb(20 20 20));
+	--color-text: light-dark(rgb(40 40 40), rgb(220 220 220));
+
 	--font-primary: 'Akshar', sans-serif;
 }
 
+* {
+	box-sizing: border-box;
+	position: relative;
+}
+
 body {
+	background: var(--color-background);
+	color: var(--color-text);
 	font-family: var(--font-primary);
-	font-size: 1.2em;
-	font-weight: 375;
+	font-size: 1.3em;
+	font-weight: 300;
 	margin: 0;
-	padding: 0;
+	padding: 20px;
 	-webkit-font-smoothing: antialiased;
 }
 
 h1 {
-	font-weight: 500;
+	color: var(--color-text);
+	font-size: 3em;
+	font-weight: 300;
+	margin-block: 0 0.5em;
+	text-shadow: 2px 2px 0 var(--color-background),
+		/* 4px 4px 0 rgb(from var(--color-primary) r g b / 0.5), */
+		6px 6px 10px rgb(from var(--color-primary) r g b / 0.4);
 }
 
 header {
-	margin: auto;
-	max-width: 900px;
+	margin: 1em auto;
+	max-width: 700px;
+
+	.controls {
+		input[type=file] {
+			display: none;
+		}
+	}
+}
+
+code {
+	background-color: rgb(from var(--color-text) r g b / 0.1);
+	border-radius: 0.5em;
+	padding: 0.2em 0.4em;
+}
+
+button {
+	align-items: center;
+	background-color: transparent;
+	border: 2px solid var(--color-primary);
+	border-radius: 0.4em;
+	color: var(--color-primary);
+	cursor: pointer;
+	display: inline-flex;
+	font-family: inherit;
+	font-size: inherit;
+	gap: 0.5em;
+	justify-content: center;
+	margin-block: 0.4em;
+	padding: 0.5em 1em;
+
+	&:active {
+		background-color: var(--color-text);
+	}
+
+	&.icon {
+		&::before {
+			--size: max(round(1em, 6px), 24px);
+			background-color: currentcolor;
+			content: '';
+			display: block;
+			mask: no-repeat center / contain;
+			height: var(--size);
+			width: var(--size);
+		}
+	}
+}
+
+#select-images-button::before {
+	mask-image: url('./images/icon-file-open.svg');
+}
+
+#toggle-colors::before {
+	mask-image: url('./images/icon-palette.svg');
 }
 
 main {
@@ -32,51 +102,76 @@ main {
 .images {
 	display: grid;
 	gap: 1em;
-	grid-template-columns: repeat(auto-fit, minmax(600px, 1fr));
-	padding: 1em;
+	grid-template-columns: repeat(auto-fill, minmax(300px, 700px));
 	place-content: center;
+}
 
-	.demo {
-		display: grid;
-		gap: 0.5em;
-		grid-template-columns: 3fr 3fr 2fr;
+.demo {
+	container: demo / inline-size;
+	display: grid;
+	gap: 0.5em;
+	grid-template-columns: 3fr 3fr;
+	view-transition-name: match-element;
 
-		input {
-			display: none;
+	input {
+		display: none;
+	}
+
+	img,
+	.preview {
+		width: 100%;
+	}
+
+	canvas {
+		aspect-ratio: 1;
+		display: block;
+		image-rendering: pixelated;
+		width: 100%;
+	}
+
+	.colors {
+		display: none;
+		flex-direction: column;
+		gap: inherit;
+
+		.packed-colors {
+			aspect-ratio: 3 / 1;
+			background: linear-gradient(
+				to right,
+				var(--lqip-c0) 33%,
+				var(--lqip-c1) 33%,
+				var(--lqip-c1) 66%,
+				var(--lqip-c2) 66%
+			);
 		}
 
-		img,
-		.preview {
-			width: 100%;
+		code {
+			font-size: 4cqw;
 		}
+	}
 
-		canvas {
-			aspect-ratio: 1;
-			image-rendering: pixelated;
-			width: 100%;
-		}
+	.preview {
+		img {
+			object-position: 200vw 0;
 
-		.colors {
-			.packed-colors {
-				aspect-ratio: 3 / 1;
-				background: linear-gradient(
-					to right,
-					var(--lqip-c0) 33%,
-					var(--lqip-c1) 33%,
-					var(--lqip-c1) 66%,
-					var(--lqip-c2) 66%
-				);
-			}
-		}
-
-		.preview {
-			img {
-				object-position: 200vw 0;
-
-				&:hover {
-					object-position: revert;
-				}
+			&:hover {
+				object-position: revert;
 			}
 		}
 	}
+}
+
+.show-colors {
+	.demo {
+		grid-template-columns: 3fr 3fr 2fr;
+
+		.colors {
+			display: flex;
+		}
+	}
+}
+
+::view-transition-group(*) {
+	animation-duration: 0.3s;
+	animation-timing-function: ease-in-out;
 }
