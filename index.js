@@ -1,4 +1,13 @@
-import { packColor11Bit, packColor10Bit, unpackColor11Bit, unpackColor10Bit } from './color.js'
+import { packColor11Bit, packColor10Bit } from './color.js'
+
+const startViewTransition = (fn) => {
+	if (document.startViewTransition) {
+		document.startViewTransition(fn)
+	}
+	else {
+		fn()
+	}
+}
 
 addEventListener('DOMContentLoaded', () => {
 	const imagesElement = document.querySelector('.images')
@@ -14,12 +23,15 @@ addEventListener('DOMContentLoaded', () => {
 	const selectInput = document.getElementById('select-images')
 	selectInput.addEventListener('change', (event) => {
 		const files = event.target.files
-		for (const file of files) {
-			const image = new Image()
-			image.src = URL.createObjectURL(file)
-			const demo = new ImageDemo(image)
-			imagesElement.insertBefore(demo.element, imagesElement.firstChild)
-		}
+
+		startViewTransition(() => {
+			for (const file of files) {
+				const image = new Image()
+				image.src = URL.createObjectURL(file)
+				const demo = new ImageDemo(image)
+				imagesElement.insertBefore(demo.element, imagesElement.firstChild)
+			}
+		})
 	})
 
 	const selectButton = document.getElementById('select-images-button')
@@ -28,7 +40,7 @@ addEventListener('DOMContentLoaded', () => {
 	// Toggle colors preview.
 	const toggleColorsButton = document.getElementById('toggle-colors')
 	toggleColorsButton.addEventListener('click', () => {
-		document.startViewTransition(() => {
+		startViewTransition(() => {
 			document.body.classList.toggle('show-colors')
 		})
 	})
@@ -65,7 +77,7 @@ class ImageDemo {
 	async render() {
 		const bitmap = await createImageBitmap(this.image, {
 			resizeHeight: this.context.canvas.height,
-			resizeQuality: 'high',
+			resizeQuality: 'high', // Try this with low.
 			resizeWidth: this.context.canvas.width,
 		})
 

@@ -21,6 +21,7 @@ body {
 	font-family: var(--font-primary);
 	font-size: 1.3em;
 	font-weight: 300;
+	line-height: 1.7;
 	margin: 0;
 	padding: 20px;
 	-webkit-font-smoothing: antialiased;
@@ -39,6 +40,20 @@ h1 {
 header {
 	margin: 1em auto;
 	max-width: 700px;
+
+	p.note {
+		&::before {
+			background-color: light-dark(rgb(255 58 0), rgb(255 188 0));
+			content: '';
+			display: block;
+			height: 1.7em;
+			mask: url('./images/icon-warning.svg') no-repeat center / contain;
+			position: absolute;
+			right: calc(100% + 0.5em);
+			top: 0;
+			width: max(24px, round(1em, 6px));
+		}
+	}
 
 	.controls {
 		input[type=file] {
@@ -70,6 +85,8 @@ button {
 
 	&:active {
 		background-color: var(--color-text);
+		border-color: var(--color-text);
+		color: var(--color-background);
 	}
 
 	&.icon {
@@ -111,7 +128,10 @@ main {
 	display: grid;
 	gap: 0.5em;
 	grid-template-columns: 3fr 3fr;
-	view-transition-name: match-element;
+
+	&, img {
+		view-transition-name: match-element;
+	}
 
 	input {
 		display: none;
@@ -172,6 +192,20 @@ main {
 }
 
 ::view-transition-group(*) {
-	animation-duration: 0.3s;
-	animation-timing-function: ease-in-out;
+	animation-duration: 0.5s;
+	animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@media (width < 750px) {
+	header {
+		p.note {
+			&::before {
+				display: inline-block;
+				position: relative;
+				right: revert;
+				top: revert;
+				vertical-align: middle;
+			}
+		}
+	}
 }
