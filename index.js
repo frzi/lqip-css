@@ -75,6 +75,8 @@ class ImageDemo {
 	}
 
 	async render() {
+		this.element.classList.add('loaded')
+
 		const bitmap = await createImageBitmap(this.image, {
 			resizeHeight: this.context.canvas.height,
 			resizeQuality: 'low', // Try this with low.

@@ -143,7 +143,15 @@ main {
 
 	img,
 	.preview {
+		min-height: 30cqw;
 		width: 100%;
+	}
+
+	&.loaded {
+		img,
+		.preview {
+			min-height: revert;
+		}
 	}
 
 	canvas {
