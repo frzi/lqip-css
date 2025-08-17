@@ -137,6 +137,10 @@ main {
 		display: none;
 	}
 
+	img {
+		display: block;
+	}
+
 	img,
 	.preview {
 		width: 100%;
@@ -167,6 +171,7 @@ main {
 
 		code {
 			font-size: 4cqw;
+			text-transform: uppercase;
 		}
 	}
 
