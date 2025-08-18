@@ -16,7 +16,7 @@ addEventListener('DOMContentLoaded', () => {
 	for (const image of images) {
 		image.remove()
 		const demo = new ImageDemo(image)
-		imagesElement.append(demo.element)
+		imagesElement.append(demo.element) // Add to the back.
 	}
 
 	// Select image(s)
@@ -24,12 +24,26 @@ addEventListener('DOMContentLoaded', () => {
 	selectInput.addEventListener('change', (event) => {
 		const files = event.target.files
 
+		const initDemo = (image) => {
+			const demo = new ImageDemo(image)
+			imagesElement.insertBefore(demo.element, imagesElement.firstChild) // Add to the front.
+		}
+
 		startViewTransition(() => {
 			for (const file of files) {
 				const image = new Image()
-				image.src = URL.createObjectURL(file)
-				const demo = new ImageDemo(image)
-				imagesElement.insertBefore(demo.element, imagesElement.firstChild)
+
+				const fileReader = new FileReader()
+				fileReader.onload = () => {
+					image.src = fileReader.result
+					initDemo(image)
+				}
+				fileReader.onerror = () => {
+					// Try as an ObjectURL instead.
+					image.src = URL.createObjectURL(file)
+					initDemo(image)
+				}
+				fileReader.readAsDataURL(file)
 			}
 		})
 	})
@@ -55,7 +69,7 @@ class ImageDemo {
 		this.image = image
 
 		this.element = this.constructor.templateElement.content.cloneNode(true).children[0]
-		this.element.id = 'image-' + crypto.randomUUID()
+		this.element.id = 'image-' + (crypto.randomUUID?.() || Math.round(Math.random() * 1e8).toString())
 
 		// Give the new image its new home.
 		this.element.querySelector('.image').append(this.image)
