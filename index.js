@@ -16,13 +16,18 @@ addEventListener('DOMContentLoaded', () => {
 	for (const image of images) {
 		image.remove()
 		const demo = new ImageDemo(image)
-		imagesElement.append(demo.element)
+		imagesElement.append(demo.element) // Add to the back.
 	}
 
 	// Select image(s)
 	const selectInput = document.getElementById('select-images')
 	selectInput.addEventListener('change', (event) => {
 		const files = event.target.files
+
+		const initDemo = (image) => {
+			const demo = new ImageDemo(image)
+			imagesElement.insertBefore(demo.element, imagesElement.firstChild) // Add to the front.
+		}
 
 		startViewTransition(() => {
 			for (const file of files) {
@@ -31,15 +36,14 @@ addEventListener('DOMContentLoaded', () => {
 				const fileReader = new FileReader()
 				fileReader.onload = () => {
 					image.src = fileReader.result
+					initDemo(image)
 				}
 				fileReader.onerror = () => {
 					// Try as an ObjectURL instead.
 					image.src = URL.createObjectURL(file)
+					initDemo(image)
 				}
 				fileReader.readAsDataURL(file)
-
-				const demo = new ImageDemo(image)
-				imagesElement.insertBefore(demo.element, imagesElement.firstChild)
 			}
 		})
 	})
