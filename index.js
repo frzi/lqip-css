@@ -27,9 +27,14 @@ addEventListener('DOMContentLoaded', () => {
 		startViewTransition(() => {
 			for (const file of files) {
 				const image = new Image()
-				image.src = URL.createObjectURL(file)
-				const demo = new ImageDemo(image)
-				imagesElement.insertBefore(demo.element, imagesElement.firstChild)
+
+				const fileReader = new FileReader()
+				fileReader.onload = () => {
+					image.src = fileReader.result
+					const demo = new ImageDemo(image)
+					imagesElement.insertBefore(demo.element, imagesElement.firstChild)
+				}
+				fileReader.readAsDataURL(file)
 			}
 		})
 	})
@@ -55,7 +60,7 @@ class ImageDemo {
 		this.image = image
 
 		this.element = this.constructor.templateElement.content.cloneNode(true).children[0]
-		this.element.id = 'image-' + crypto.randomUUID()
+		this.element.id = 'image-' + (crypto.randomUUID?.() || Math.round(Math.random() * 1e8).toString())
 
 		// Give the new image its new home.
 		this.element.querySelector('.image').append(this.image)
