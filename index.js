@@ -31,10 +31,15 @@ addEventListener('DOMContentLoaded', () => {
 				const fileReader = new FileReader()
 				fileReader.onload = () => {
 					image.src = fileReader.result
-					const demo = new ImageDemo(image)
-					imagesElement.insertBefore(demo.element, imagesElement.firstChild)
+				}
+				fileReader.onerror = () => {
+					// Try as an ObjectURL instead.
+					image.src = URL.createObjectURL(file)
 				}
 				fileReader.readAsDataURL(file)
+
+				const demo = new ImageDemo(image)
+				imagesElement.insertBefore(demo.element, imagesElement.firstChild)
 			}
 		})
 	})
