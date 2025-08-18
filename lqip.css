@@ -11,7 +11,7 @@
 		from var(--lqip)
 		srgb
 		calc(round(down, r * 255 / pow(2,4)) / 15)
-		calc(((mod(round(down, r * 255), pow(2,4)) / 15)))
+		calc(mod(round(down, r * 255), pow(2,4)) / 15)
 		calc(round(down, g * 255 / pow(2,5)) / 7)
 		/ 1
 	);
