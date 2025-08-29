@@ -82,6 +82,7 @@ class ImageDemo {
 
 		// Prepare the preview.
 		this.preview = this.image.cloneNode(true)
+		this.preview.style.removeProperty('--lqip') // Remove hardcoded LQIP value.
 		this.element.querySelector('.preview').append(this.preview)
 
 		// Load the image.
@@ -121,8 +122,15 @@ class ImageDemo {
 		const combined = (BigInt(pc0) << 21n) | (BigInt(pc1) << 10n) | BigInt(pc2)
 		const hex = `#${combined.toString(16).padStart(8, '0')}`
 
-		this.preview.style.setProperty('--lqip', hex)
-		this.element.querySelector('.packed-colors').style.setProperty('--lqip', hex)
+		if (CSS.supports('color', 'attr(clr type(<color>), red)')) {
+			this.preview.dataset.lqip = hex
+			this.element.querySelector('.packed-colors').dataset.lqip = hex
+		}
+		else {
+			this.preview.style.setProperty('--lqip', hex)
+			this.element.querySelector('.packed-colors').style.setProperty('--lqip', hex)
+		}
+
 
 		this.element.querySelector('code').textContent = hex
 	}
